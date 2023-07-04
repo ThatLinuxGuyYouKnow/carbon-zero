@@ -30,11 +30,11 @@
     "formdata-polyfill": "^4.0.10",
     "mime-db": "^1.52.0",
     "mime-types": "^2.1.35",
+    "node-cron": "^3.0.2",
     "node-domexception": "^1.0.0",
     "node-fetch": "^3.3.1",
     "proxy-from-env": "^1.1.0",
     "web-streams-polyfill": "^3.2.1"
   },
-  "devDependencies": {},
   "description": ""
 }
