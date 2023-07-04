@@ -1,3 +1,4 @@
+console.log('the code has started!!!!!!');
 const fetchNews = require('./fetchNews');
 const storeNews = require('./storeNews');
 
@@ -7,6 +8,7 @@ async function fetchAndStoreNews() {
   for (const country of countries) {
     const articles = await fetchNews(country, 'climate'); // Change 'technology' to the desired category
     await storeNews(country, articles);
+    console.log('successful at first');
   }
 }
 
