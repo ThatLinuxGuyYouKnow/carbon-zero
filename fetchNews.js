@@ -5,22 +5,26 @@ const apiKey = process.env.NEWS_API_KEY;
 
 async function fetchNews(country, text) {
   try {
-    const apiUrl = 'https://api.worldnewsapi.com/search-news';
+    const apiUrl = 'https://newsdata.io/api/1/news?';
 
     const params = {
-      'text':text,
-      'source-countries': country,
-      // Add other parameters as needed
-      'api-key': apiKey,
+      apikey: apiKey,
+      q: text,
+      language: 'en',
+      country:country, // Assuming English language is preferred
+ 
     };
 
-    const response = await axios.get(apiUrl, { params })
+    console.log(apiUrl, { params });
+    console.log('after this');
+
+    const response = await axios.get(apiUrl, { params });
 
     if (response.status === 200) {
-      const { news } = response.data;
-      
+      const { data } = response;
+
       // Map the relevant fields from each article
-      const mappedNews = news.map((article) => ({
+      const mappedNews = data.map((article) => ({
         id: article.id,
         title: article.title,
         text: article.description || article.content || '',
@@ -36,6 +40,7 @@ async function fetchNews(country, text) {
       console.log(mappedNews);
       return mappedNews;
     } else {
+      console.log(apiUrl, { params });
       throw new Error(`Request failed with status ${response.status}`);
     }
   } catch (error) {

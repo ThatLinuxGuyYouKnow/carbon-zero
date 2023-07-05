@@ -25,7 +25,7 @@ async function fetchAndStoreNews() {
 }
 
 // Run the function at a specific time every day. In this case at midnight.
-cron.schedule("56 1 * * *", function() {
+cron.schedule("00 3 * * *", function() {
   console.log("---------------------");
   console.log("Running Cron Job");
   fetchAndStoreNews();
