@@ -10,9 +10,8 @@ async function fetchNews(country, text) {
     const params = {
       apikey: apiKey,
       q: text,
-      language: 'en',
-      country:country, // Assuming English language is preferred
- 
+      language: 'en', // Assuming English language is preferred
+      country:country,
     };
 
     console.log(apiUrl, { params });
@@ -23,9 +22,12 @@ async function fetchNews(country, text) {
     if (response.status === 200) {
       const { data } = response;
 
-      // Map the relevant fields from each article
-      const mappedNews = data.map((article) => ({
-        id: article.id,
+      // Check if the response data is an array or a single object
+      const articles = Array.isArray(data) ? data : [data];
+
+      // Map the relevant fields from the article
+      const mappedNews = articles.map((article) => ({
+        id: article.link,
         title: article.title,
         text: article.description || article.content || '',
         summary: article.description || '',

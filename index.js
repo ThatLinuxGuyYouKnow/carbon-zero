@@ -17,7 +17,7 @@ const countries =  ["us", "br", "ng", "ru", "mx", "eg", "de", "tr", "gb", "fr", 
 console.log('country list here');
 async function fetchAndStoreNews() {
   for (const country of countries) {
-    const articles = await fetchNews(country, 'Tax'); 
+    const articles = await fetchNews(country, 'tax'); 
     console.log('it has fetched the news!')
 // Change 'technology' to the desired category
     await storeNews(country, articles);
@@ -25,7 +25,7 @@ async function fetchAndStoreNews() {
 }
 
 // Run the function at a specific time every day. In this case at midnight.
-cron.schedule("00 3 * * *", function() {
+cron.schedule("28 3 * * *", function() {
   console.log("---------------------");
   console.log("Running Cron Job");
   fetchAndStoreNews();
