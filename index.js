@@ -21,9 +21,11 @@ async function fetchAndStoreNews() {
     await storeNews(country, articles);
   }
 }
-
+cron.schedule("*/2 * * * * *", function() {
+  console.log(new Date().toISOString()); 
+});
 // Run the function at a specific time every day. In this case at midnight.
-cron.schedule("50 00 * * *", function() {
+cron.schedule("03 01 * * *", function() {
   console.log("---------------------");
   console.log("Running Cron Job");
   fetchAndStoreNews();
