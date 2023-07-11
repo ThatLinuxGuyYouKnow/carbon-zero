@@ -4,7 +4,7 @@
   "scripts": {
     "start": "node index.js",
     "test": "mocha",
-    "build": "babel src -d lib"
+    "build": ""
   },
   "repository": {
     "type": "git",
