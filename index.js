@@ -25,7 +25,7 @@ cron.schedule("*/2 * * * * *", function() {
   console.log(new Date().toISOString()); 
 });
 // Run the function at a specific time every day. In this case at midnight.
-cron.schedule("03 01 * * *", function() {
+cron.schedule("06 00 * * *", function() {
   console.log("---------------------");
   console.log("Running Cron Job");
   fetchAndStoreNews();
