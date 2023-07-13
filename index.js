@@ -25,6 +25,18 @@ cron.schedule("06 00 * * *", function() {
 
 // Define the route to display the last run time of cron jobs
 
+
+// Function to fetch and store news
+
+async function fetchAndStoreNews() {
+  for (const country of countries) {
+    const articles = await fetchNews(country, 'Climate');
+    console.log('it has fetched the news!');
+    await storeNews(country, articles);
+  }
+}
+
+
 app.get('/', (req, res) => {
   res.send(`
     <h1>Last Cron Job Run Times</h1>
@@ -38,13 +50,3 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
-
-// Function to fetch and store news
-
-async function fetchAndStoreNews() {
-  for (const country of countries) {
-    const articles = await fetchNews(country, 'Climate');
-    console.log('it has fetched the news!');
-    await storeNews(country, articles);
-  }
-}
