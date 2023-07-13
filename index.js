@@ -3,11 +3,13 @@ const fetchNews = require('./fetchNews');
 const storeNews = require('./storeNews');
 const winston = require('winston');
 const logger = winston.createLogger({
+
   transports: [
     new winston.transports.File({
       filename: '/tmp/app.log' 
     })
   ]
+
 });
 
 // Start the server
@@ -25,7 +27,7 @@ cron.schedule("*/2 * * * *", function() {
   logger.info('Running cron job 1, now output');
 });
 
-cron.schedule("10 17 * * *", function() {
+cron.schedule("00 00 * * *", function() {
   logger.info('Running cron job 2');
   fetchAndStoreNews();
 });
