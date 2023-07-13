@@ -36,7 +36,8 @@
     "node-domexception": "^1.0.0",
     "node-fetch": "^3.3.1",
     "proxy-from-env": "^1.1.0",
-    "web-streams-polyfill": "^3.2.1"
+    "web-streams-polyfill": "^3.2.1",
+    "winston": "^3.10.0"
   },
   "description": ""
 }

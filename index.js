@@ -1,39 +1,34 @@
-const express = require('express');
 const cron = require('node-cron');
 const fetchNews = require('./fetchNews');
 const storeNews = require('./storeNews');
-
-const app = express();
-const port = process.env.PORT || 3000; 
-
-// Use the PORT environment variable for the port instead of a hardcoded 3000
-async function fetchAndStoreNews() {
-  for (const country of countries) {
-    const articles = await fetchNews(country, 'Climate');
-    console.log('it has fetched the news!');
-    await storeNews(country, articles);
-  }
-}
-
-let lastCronJob1Run = ''; 
-let lastCronJob2Run = '';
+const winston = require('winston');
+const logger = winston.createLogger({
+  transports: [
+    new winston.transports.File({
+      filename: '/tmp/app.log' 
+    })
+  ]
+});
 
 // Define your cron jobs
 
 cron.schedule("*/2 * * * *", function() {
-  console.log(new Date().toISOString());
-  lastCronJob1Run = new Date().toISOString();
+  logger.info('Running cron job 1, now output');
+ 
 });
 
 cron.schedule("06 00 * * *", function() {
-  console.log("---------------------");
-  console.log("Running Cron Job");
-  lastCronJob2Run = new Date().toISOString();
+  logger.info('Running cron job 2');
   fetchAndStoreNews();
 });
 
-// ...
+// Function to fetch and store news
 
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`); 
-});
+async function fetchAndStoreNews() {
+  for (const country of countries) {
+    const articles = await fetchNews(country, 'Climate');
+    await storeNews(country, articles);
+  }
+}
+
+logger.info('Cron jobs setup, ready to run!');
