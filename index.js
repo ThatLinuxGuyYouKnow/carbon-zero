@@ -25,7 +25,7 @@ cron.schedule("*/2 * * * *", function() {
   logger.info('Running cron job 1, now output');
 });
 
-cron.schedule("06 00 * * *", function() {
+cron.schedule("10 17 * * *", function() {
   logger.info('Running cron job 2');
   fetchAndStoreNews();
 });
