@@ -10,11 +10,19 @@ const logger = winston.createLogger({
   ]
 });
 
+// Start the server
+const express = require('express');
+const app = express();
+const port = 3000;
+
+app.listen(port, () => {
+  console.log(`Server listening at http://localhost:${port}`);
+});
+
 // Define your cron jobs
 
 cron.schedule("*/2 * * * *", function() {
   logger.info('Running cron job 1, now output');
- 
 });
 
 cron.schedule("06 00 * * *", function() {
@@ -32,3 +40,10 @@ async function fetchAndStoreNews() {
 }
 
 logger.info('Cron jobs setup, ready to run!');
+
+
+
+
+
+
+
