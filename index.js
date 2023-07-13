@@ -1,33 +1,50 @@
-cron.schedule("*/2 * * * *", function() {
-  console.log(new Date().toISOString()); 
-});
-console.log('the code has started!!!!!!');
+const express = require('express');
+const cron = require('node-cron');
 const fetchNews = require('./fetchNews');
 const storeNews = require('./storeNews');
 
+const app = express();
+const port = 3000;
 
+let lastCronJob1Run = '';
+let lastCronJob2Run = '';
 
-// Run the function once a day
-const cron = require('node-cron');
+// Define your cron jobs
 
-const countries =  ["us", "br", "ng", "ru", "mx", "eg", "de", "tr", "gb", "fr", "it", "za", "es", "ar", "ca", "sa", "pl", "sg", "dk", "fi", "no", "ie", "at", "nz", "gr", "il", "cz", "ro", "ke", "ma", "et", "dz", "gh", "tz", "ci"];
+cron.schedule("*/2 * * * *", function() {
+  console.log(new Date().toISOString());
+  lastCronJob1Run = new Date().toISOString();
+});
 
-// Rest of the code...
-
-  // Add the 50 most internet active country codes here, including Nigeria ('ng')
-
-async function fetchAndStoreNews() {
-  for (const country of countries) {
-    const articles = await fetchNews(country, 'Climate'); 
-    console.log('it has fetched the news!')
-// Change 'technology' to the desired category
-    await storeNews(country, articles);
-  }
-}
-
-// Run the function at a specific time every day. In this case at midnight.
 cron.schedule("06 00 * * *", function() {
   console.log("---------------------");
   console.log("Running Cron Job");
+  lastCronJob2Run = new Date().toISOString();
   fetchAndStoreNews();
 });
+
+// Define the route to display the last run time of cron jobs
+
+app.get('/', (req, res) => {
+  res.send(`
+    <h1>Last Cron Job Run Times</h1>
+    <p>Cron Job 1: ${lastCronJob1Run}</p>
+    <p>Cron Job 2: ${lastCronJob2Run}</p>
+  `);
+});
+
+// Start the server
+
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
+
+// Function to fetch and store news
+
+async function fetchAndStoreNews() {
+  for (const country of countries) {
+    const articles = await fetchNews(country, 'Climate');
+    console.log('it has fetched the news!');
+    await storeNews(country, articles);
+  }
+}
