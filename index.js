@@ -1,3 +1,6 @@
+cron.schedule("*/2 * * * *", function() {
+  console.log(new Date().toISOString()); 
+});
 console.log('the code has started!!!!!!');
 const fetchNews = require('./fetchNews');
 const storeNews = require('./storeNews');
@@ -21,9 +24,7 @@ async function fetchAndStoreNews() {
     await storeNews(country, articles);
   }
 }
-cron.schedule("*/2 * * * *", function() {
-  console.log(new Date().toISOString()); 
-});
+
 // Run the function at a specific time every day. In this case at midnight.
 cron.schedule("06 00 * * *", function() {
   console.log("---------------------");
