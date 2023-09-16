@@ -1,2 +1,2 @@
 # carbon-zero
-experimental Ruby - rails web app
+experimental Ruby - rails web app.
