@@ -1,2 +1,2 @@
 # carbon-zero client app
-experimental Ruby × rails web app.
+experimental Ruby om rails web app.
