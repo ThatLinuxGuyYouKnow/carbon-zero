@@ -1,4 +1,4 @@
-const cron = require('node-cron');
+const cron = require('node-cron')
 const fetchNews = require('./fetchNews');
 const storeNews = require('./storeNews');
 const winston = require('winston');
