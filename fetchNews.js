@@ -1,4 +1,4 @@
-require('dotenv').config();l
+require('dotenv').config();
 const axios = require('axios');
 
 const apiKey = process.env.NEWS_API_KEY;
