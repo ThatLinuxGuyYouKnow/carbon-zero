@@ -1,2 +1,2 @@
 # carbon-zero client app
-simple Ruby on rails web app
+Node server for Carbon Zero
