@@ -5,7 +5,7 @@ const apiKey = process.env.NEWS_API_KEY;
 
 async function fetchNews(country, text) {
   try {
-    const apiUrl = 'https://newsdata.io/api/1/news?';
+    const apiUrl = 'https://newsdata.io/api/1/news';
 
     const params = {
       country,
